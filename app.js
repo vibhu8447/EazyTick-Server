@@ -15,7 +15,7 @@ mongoose
   .catch(err => console.log(err));
 app.use('/pricelist',PriceList);
 app.get('/',(req,res)=>{
-  res.send("hello vibhu!!");
+  res.send("hello vibhu!!!");
 })
   app.post("/add", (request, response) => {
     console.log(request.body);
