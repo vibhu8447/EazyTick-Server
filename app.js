@@ -14,6 +14,9 @@ mongoose
   .then(() => console.log("Database connected!"))
   .catch(err => console.log(err));
 app.use('/pricelist',PriceList);
+app.get('/',(req,res)=>{
+  res.send("hello vibhu!!");
+})
   app.post("/add", (request, response) => {
     console.log(request.body);
     const user = new userModel(request.body);
