@@ -6,6 +6,14 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(express.static('public'))
+
+// Templating Engine
+app.set('views', './src/views')
+app.set('view engine', 'ejs')
+
+app.use(express.urlencoded({extended: true})); // New
+var port =process.env.PORT||3000;
 const uri = "mongodb+srv://vibhu8447:vibhu@cluster0.elndm.mongodb.net/LEARN1?retryWrites=true&w=majority";
 mongoose
   .connect(uri, {
@@ -28,6 +36,6 @@ app.get('/',(req,res)=>{
       response.status(500).send(error);
     }
 });
-app.listen(3000,()=>{
-console.log("listening to 3000");
+app.listen(port,()=>{
+console.log(`listening to ${port}`);
 })
