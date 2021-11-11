@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const mongoose =require('mongoose');
 const userModel = require("./model/user");
@@ -14,7 +15,8 @@ app.set('view engine', 'ejs')
 
 app.use(express.urlencoded({extended: true})); // New
 var port =process.env.PORT||3000;
-const uri = "mongodb+srv://vibhu8447:vibhu@cluster0.elndm.mongodb.net/LEARN1?retryWrites=true&w=majority";
+const uri = process.env.DB_CONNECTION_STRING;
+console.log(uri);
 mongoose
   .connect(uri, {
       useNewUrlParser: true,
@@ -30,7 +32,7 @@ app.get('/',(req,res)=>{
     const user = new userModel(request.body);
   
     try {
-       user.save();
+         user.save();
       response.send(user);
     } catch (error) {
       response.status(500).send(error);
