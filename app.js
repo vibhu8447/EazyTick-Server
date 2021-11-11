@@ -29,9 +29,7 @@ app.get('/',(req,res)=>{
 })
   app.post("/add", (request, response) => {
     console.log(request.body);
-    const user = new userModel(request.body).catch((err)=>{
-      response.status(500).send(err);
-    });
+    const user = new userModel(request.body)
   
     try {
          user.save();
