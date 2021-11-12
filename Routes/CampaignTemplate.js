@@ -29,7 +29,7 @@ router.get("/all",(req,res)=>{
 
 // to get Template list by id
 router.get('/:id',(req,res)=>{
-    TemplateModel.find({_id:'618da2f44f7416a10e13cd49'}).then((result)=>{
+    TemplateModel.find({_id:`${req.params.id}`}).then((result)=>{
         res.status(200).send({data:result});
     })
     .catch((err)=>{

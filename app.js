@@ -4,6 +4,7 @@ const mongoose =require('mongoose');
 const userModel = require("./model/user");
 const PriceList= require('./Routes/PricingList');
 const CampaignTemplate =require('./Routes/CampaignTemplate');
+const ChatidList = require('./Routes/CampainChatIdList');
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -28,6 +29,10 @@ function ConnectToDB(){
   
   // Campaign Template
   app.use('/template',CampaignTemplate)
+  
+  // Campaign Template
+  app.use('/chatidlist',ChatidList)
+  
   app.get('/',(req,res)=>{
     res.send("hello vibhu!!!");
   })
