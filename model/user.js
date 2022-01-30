@@ -5,12 +5,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  age: {
-    type: Number,
-    default: 0,
+  system: {
+    type: String,
+    required:true,
   },
 });
-
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;

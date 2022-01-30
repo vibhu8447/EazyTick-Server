@@ -6,6 +6,6 @@ router.use(function timeLog (req, res, next) {
   })
 
 router.get('/',(req,res)=>{
-    res.send("pricepage");
+    res.send("Hello Wolrd");
 })
 module.exports =router;

@@ -3,9 +3,17 @@ const express = require('express');
 const mongoose =require('mongoose');
 const userModel = require("./model/user");
 const PriceList= require('./Routes/PricingList');
-const CampaignTemplate =require('./Routes/CampaignTemplate');
-const ChatidList = require('./Routes/CampainChatIdList');
+const CampaignTemplate =require('./Routes/Campaign/CampaignTemplate');
+const ChatidList = require('./Routes/Campaign/CampainChatIdList');
+const RunningCampaign= require('./Routes/Campaign/RunningCampaign');
+const Scheduler = require('./Routes/Scheduler/Scheduler');
+const Label= require('./Routes/Label/label');
+
+// const bc;
+
+const validateuser= require('./middleware');
 const app = express();
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -24,6 +32,8 @@ function ConnectToDB(){
      .then(() => console.log("Database connected!"))
      .catch(err => console.log(err));
 }
+
+  app.use('/scheduler',Scheduler);
   //  pricing page 
   app.use('/pricelist',PriceList);
   
@@ -33,19 +43,34 @@ function ConnectToDB(){
   // Campaign Template
   app.use('/chatidlist',ChatidList)
   
-  app.get('/',(req,res)=>{
-    res.send("hello vibhu!!!");
-  })
-  app.post("/add", (request, response) => {
-    console.log(request.body);
-    const user = new userModel(request.body)
+  // Running Campaign
+  app.use('/runningcampaign',RunningCampaign)
   
-    try {
-         user.save();
-      response.send(user);
-    } catch (error) {
-      response.status(500).send(error);
-    }
+  //  Labels
+  app.use('/label',Label);
+
+  app.get('/',(req,res)=>{
+    res.send("Nothing here");
+  })
+
+  app.post("/add", validateuser, async (request, response) => {
+    console.log(request.body);
+    exits=  await userModel.findOne({system:request.body.system}) ;
+      console.log(exits);
+      if(exits)
+      {
+        response.status(200).send({status:true,message:"already Exits!! "});
+      }
+      else
+      {
+      const user = new userModel(request.body)
+      try {
+        user.save();
+    response.send(user);
+      } catch (error) {
+        response.status(500).send(error);
+      }
+  }
 });
 app.listen(port,()=>{
 console.log(`listening to ${port}`);
