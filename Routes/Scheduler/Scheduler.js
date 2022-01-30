@@ -5,9 +5,7 @@ router.use(function timeLog (req, res, next) {
     console.log('Scheuler Time: ', Date.now())
     next()
   })
-  let id=1;
-  router.get('/createCustomerSchedule', (req,res)=>{
-      id++;
+  router.post('/createCustomerSchedule', (req,res)=>{
     const user_mobile= req.query.user_mobile_No;
     const chat_id= req.query.chat_id;
     const customer_mobile= req.query.mobile;
