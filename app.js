@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors=require('cors');
 const express = require('express');
 const mongoose =require('mongoose');
 const userModel = require("./model/user");
@@ -9,12 +10,15 @@ const RunningCampaign= require('./Routes/Campaign/RunningCampaign');
 const Scheduler = require('./Routes/Scheduler/Scheduler');
 const Label= require('./Routes/Label/label');
 
-// const bc;
-
 const validateuser= require('./middleware');
 const app = express();
 
-
+app.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'))

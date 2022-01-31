@@ -21,7 +21,7 @@ router.post('/',(req,res)=>{
 // to get all template list
 router.get("/all",(req,res)=>{
    TemplateModel.find().then((result)=>{
-       res.status(200).send(result);
+       res.status(200).send(result)
    }).catch((err)=>{
        res.send(err);
    }) 
