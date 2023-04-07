@@ -21,7 +21,7 @@ app.all('/*', function(req, res, next) {
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public'))
+app.use(express.static('public'));
 app.use(express.urlencoded({extended: true})); // New
 
 app.set('views', './src/views')
@@ -37,6 +37,9 @@ function ConnectToDB(){
      .catch(err => console.log(err));
 }
 
+  app.get("/",(req,res)=>{
+    return "hi vibhu"
+  });
   app.use('/scheduler',Scheduler);
   //  pricing page 
   app.use('/pricelist',PriceList);

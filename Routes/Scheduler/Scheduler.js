@@ -48,7 +48,7 @@ router.put('/updateCustomerSchedule',async (req,res)=>{
     if(schedulerMessage.repeatTime=='0'){
       SchedulerModel.updateOne({_id:`${id}`},req.query)
       .then((result)=>{
-          res.send({status:true,"result":result});
+          res.send({status:true,message:"status is changed"});
       })
       .catch((err)=>{
           res.status(401).send(err.message);
